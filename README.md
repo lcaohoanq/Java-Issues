@@ -1,0 +1,1 @@
+- Hello Friends, welcome to my path learning Java. I am a beginner in Java and I am learning Java from scratch. I will be sharing my learning journey with you all. I hope you will enjoy it.
