@@ -27,3 +27,33 @@
 
 # Java Servlet
 - Servlet là một bộ thư viện của Java dùng để tạo các ứng dụng web (website/web application)
+- Mặc định root ('/') là một trang Hello World!
+
+- Default index.jsp
+
+![img.png](img.png)
+
+- Serve `hello.jsp` file
+
+![img_1.png](img_1.png)
+# Servlet LifeCycle
+### Có 5 bước:
+  1. Load Servlet: Servlet Container tải Servlet vào bộ nhớ
+  2. Create Servlet: Servlet Container tạo một instance của Servlet
+  3. Call `init()` method: Servlet Container gọi phương thức init() của Servlet
+  4. Call `service`()` method: Servlet Container gọi phương thức service() của Servlet
+  5. Call `destroy()` method: Servlet Container gọi phương thức destroy() của Servlet
+
+- doGet(), doPost(), doPut(), doDelete()... là các phương thức của service() method được gọi đi gọi lại nhiều lần
+
+# JSP
+- JSP (Java Server Pages) là một công nghệ cho phép viết mã Java và HTML trong cùng một file
+- Default index.jsp
+
+![img.png](img.png)
+
+- Serve `hello.jsp` file
+
+![img_1.png](img_1.png)
+
+# GET - POST 
