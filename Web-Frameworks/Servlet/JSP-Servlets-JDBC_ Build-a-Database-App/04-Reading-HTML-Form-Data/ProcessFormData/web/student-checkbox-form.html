@@ -14,16 +14,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </head>
     <body>
         <div class="container"> 
+            
             <div class="title"> 
                 <h1>Student Registeration Form</h1>
             </div>
-            <form action="http://localhost:9999/init-param/login" method="post">
+            
+            <form action="student-checkbox-response.jsp">
                 <label for="firstName">First name</label>
                 <input type="text" name="firstName" id = "firstName">
                 <label for="lastName">Last name</label>
                 <input type="text" name="lastName" id = "lastName">
+                <div>
+                    Favorite programming language <br/>
+                    
+                    <input type="radio" name="favoriteLanguage" value ="Java"> Java <br/>
+                    <input type="radio" name="favoriteLanguage" value ="C#"> C# <br/>
+                    <input type="radio" name="favoriteLanguage" value ="PHP">PHP <br/>
+                    <input type="radio" name="favoriteLanguage" value ="Ruby"> Ruby <br/>
+                </div>
+                
+                <div>
+                    Favorite food <br/>
+                    
+                    <input type="checkbox" name="favoriteFood" value ="Rice"> Rice <br/>
+                    <input type="checkbox" name="favoriteFood" value ="Banh mi"> Banh mi <br/>
+                    <input type="checkbox" name="favoriteFood" value ="Thit bam"> Thit bam <br/>
+                    <input type="checkbox" name="favoriteFood" value ="Hu tieu"> Hu Tieu <br/>
+                </div>
+                
                 <button>Submit</button>
             </form>
+            
         </div>
     </body>
 </html>

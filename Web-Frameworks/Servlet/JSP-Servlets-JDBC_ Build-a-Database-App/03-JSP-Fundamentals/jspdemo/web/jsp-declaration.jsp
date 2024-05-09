@@ -15,7 +15,6 @@
         %>
         
         
-        
         <%!
             Person admin = new Person("lcaohoanq", makeYounger(20));
         %>
