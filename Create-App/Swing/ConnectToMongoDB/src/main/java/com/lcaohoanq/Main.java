@@ -1,7 +1,6 @@
-package com.lcaohoanq.views;
+package com.lcaohoanq;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -23,8 +22,6 @@ public class Main extends JFrame implements ActionListener {
         JPanel panel = new JPanel(new BorderLayout());
 
         JButton button = new JButton("Click me");
-        button.setForeground(Color.WHITE);
-        button.setBackground(Color.RED);
         button.addActionListener(this);
 
         panel.add(button, BorderLayout.CENTER);
@@ -39,13 +36,24 @@ public class Main extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 //        queryOptions("select * from users");
-        Notification.START_SPRING_SUCCESS();
+        queryOptions("select * from users where name = 'minhnhu'");
+    }
+
+    private void queryOptions(String require){
+        if(require.equals("select * from users")){
+            new DatabaseConnection().findAllUsers();
+            Notification.QUERY_SUCCESS(require);
+        }
+        if(require.equals("select * from users where name = 'minhnhu'")){
+            new DatabaseConnection().findUserByUsername("minhnhu");
+            Notification.QUERY_SUCCESS(require);
+        }
     }
 
 }
 
 class Notification {
-    public static void START_SPRING_SUCCESS() {
-        JOptionPane.showMessageDialog(null, "Success start Spring Server", "Success", JOptionPane.INFORMATION_MESSAGE);
+    public static void QUERY_SUCCESS(String require) {
+        JOptionPane.showMessageDialog(null, require + " success", "Success", JOptionPane.INFORMATION_MESSAGE);
     }
 }

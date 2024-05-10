@@ -1,4 +1,4 @@
-package com.lcaohoanq.utils;
+package com.lcaohoanq;
 
 import io.github.cdimascio.dotenv.Dotenv;
 

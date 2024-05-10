@@ -1,6 +1,5 @@
-package com.lcaohoanq.services;
+package com.lcaohoanq;
 
-import com.lcaohoanq.utils.EnvUtils;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoException;
