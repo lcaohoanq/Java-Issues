@@ -1,4 +1,4 @@
-package com.lcaohoanq;
+package com.lcaohoanq.views;
 
 public class CopyFrame extends FunctionFrame{
 

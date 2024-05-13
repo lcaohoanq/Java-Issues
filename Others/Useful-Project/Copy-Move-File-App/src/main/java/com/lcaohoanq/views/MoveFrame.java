@@ -1,4 +1,4 @@
-package com.lcaohoanq;
+package com.lcaohoanq.views;
 
 public class MoveFrame extends FunctionFrame{
 

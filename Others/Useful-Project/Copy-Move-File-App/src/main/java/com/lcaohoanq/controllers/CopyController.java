@@ -1,2 +1,5 @@
-package com.lcaohoanq;public class CopyController {
+package com.lcaohoanq.controllers;
+
+public class CopyController {
+
 }

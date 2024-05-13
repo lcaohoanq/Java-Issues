@@ -1,5 +1,6 @@
-package com.lcaohoanq;
+package com.lcaohoanq.utils;
 
+import com.lcaohoanq.Main;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.net.URL;

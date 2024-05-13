@@ -1,5 +1,7 @@
-package com.lcaohoanq;
+package com.lcaohoanq.views;
 
+import com.lcaohoanq.utils.AudioHandler;
+import com.lcaohoanq.utils.ImageHandler;
 import java.awt.Desktop;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;

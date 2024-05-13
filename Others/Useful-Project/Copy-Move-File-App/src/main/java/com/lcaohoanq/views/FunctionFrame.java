@@ -1,5 +1,6 @@
-package com.lcaohoanq;
+package com.lcaohoanq.views;
 
+import com.lcaohoanq.utils.ImageHandler;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;

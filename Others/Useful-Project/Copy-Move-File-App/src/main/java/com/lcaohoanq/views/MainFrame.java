@@ -1,5 +1,6 @@
-package com.lcaohoanq;
+package com.lcaohoanq.views;
 
+import com.lcaohoanq.utils.ImageHandler;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;

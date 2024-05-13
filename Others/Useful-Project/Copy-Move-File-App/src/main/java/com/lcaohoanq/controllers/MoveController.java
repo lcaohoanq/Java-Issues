@@ -1,2 +1,5 @@
-package com.lcaohoanq;public class MoveController {
+package com.lcaohoanq.controllers;
+
+public class MoveController {
+
 }
