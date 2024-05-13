@@ -1,11 +1,12 @@
 package com.lcaohoanq.views;
 
+import com.lcaohoanq.controllers.FunctionController;
+import com.lcaohoanq.utils.FileHandler;
 import com.lcaohoanq.utils.ImageHandler;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -14,62 +15,81 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public abstract class FunctionFrame extends JFrame implements ActionListener {
-    private JFileChooser sourceFileChooser = new JFileChooser();
-    private JFileChooser destinationFileChooser = new JFileChooser();
-    private JTextArea fileInfoArea = new JTextArea();
-    private JButton copyButton = new JButton("Copy");
+public abstract class FunctionFrame extends JFrame {
+    private JFileChooser sourceFileChooser;
+    private JFileChooser destinationFileChooser;
+    private JPanel topPanel;
+    private JScrollPane middlePanel;
+    private JPanel bottomPanel;
+    private JTextArea fileInfoArea;
+    private JButton processButton;
+    protected JButton copyButton;
+    protected JButton moveButton;
+    protected File selectedFile;
 
     public FunctionFrame(){
-        this.setSize(1000, 500);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1000, 600);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.setLocationRelativeTo(null);
         this.setIconImage(new ImageHandler().icon);
         this.setVisible(false);
 
-        JPanel topPanel = new JPanel(new GridLayout(1, 2));
+        initUI();
+    }
+
+    private void initUI(){
+        initTop();
+        initMiddle();
+        initBottom();
+        initContainer();
+        doAction();
+    }
+
+    private void initTop(){
+        topPanel = new JPanel(new GridLayout(1, 2));
+        sourceFileChooser = new JFileChooser();
+        destinationFileChooser = new JFileChooser();
         topPanel.add(sourceFileChooser);
         topPanel.add(destinationFileChooser);
+    }
 
-        JScrollPane middlePanel = new JScrollPane(fileInfoArea);
+    private void initMiddle(){
+        fileInfoArea = new JTextArea();
+        fileInfoArea.setFont(new Font("Roboto", Font.PLAIN, 20));
+        middlePanel = new JScrollPane(fileInfoArea);
+    }
 
-        JPanel bottomPanel = new JPanel();
-        copyButton.setPreferredSize(new Dimension(300, 50));
-        bottomPanel.add(copyButton);
+    private void initBottom(){
+        bottomPanel = new JPanel();
+        processButton = new JButton("Process");
+        processButton.setPreferredSize(new Dimension(300, 50));
+        processButton.setFont(new Font("Roboto", Font.BOLD, 20));
 
+        bottomPanel.add(processButton);
+    }
+
+    private void initContainer(){
         this.add(topPanel, BorderLayout.NORTH);
         this.add(middlePanel, BorderLayout.CENTER);
         this.add(bottomPanel, BorderLayout.SOUTH);
+    }
 
+    private void viewFileData(){
         sourceFileChooser.addActionListener(e -> {
             fileInfoArea.setText("");
             if (e.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)) {
-                File selectedFile = sourceFileChooser.getSelectedFile();
+                selectedFile = sourceFileChooser.getSelectedFile();
                 fileInfoArea.append("Name: " + selectedFile.getName() + "\n");
                 fileInfoArea.append("Path: " + selectedFile.getAbsolutePath() + "\n");
-                fileInfoArea.append("Size: " + selectedFile.length() + " bytes\n");
-                fileInfoArea.append("Type: " + getFileExtension(selectedFile) + "\n");
+                fileInfoArea.append("Size: " + selectedFile.length() + " Bytes\n");
+                fileInfoArea.append("Type: " + FileHandler.getFileExtension(selectedFile) + "\n");
             }
         });
-
-        copyButton.addActionListener(this);
     }
 
-    private String getFileExtension(File file) {
-        String fileName = file.getName();
-        int dotIndex = fileName.lastIndexOf('.');
-        return (dotIndex == -1) ? "" : fileName.substring(dotIndex + 1);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Play the progress bar
-        ProgressBarFrame progressBarFrame = new ProgressBarFrame();
-        progressBarFrame.setVisible(true);
-        progressBarFrame.triggerAction();
-
-        // Copy the file
-
-    }
+    protected void doAction(){
+        viewFileData();
+        processButton.addActionListener(new FunctionController(this));
+    };
 }

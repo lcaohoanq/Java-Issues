@@ -2,11 +2,9 @@ package com.lcaohoanq.views;
 
 import com.lcaohoanq.utils.AudioHandler;
 import com.lcaohoanq.utils.ImageHandler;
-import java.awt.Desktop;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URI;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +24,7 @@ public class ProgressBarFrame extends JFrame implements ActionListener {
         this.setTitle("Loading...");
         this.setIconImage(new ImageHandler().icon);
         this.setSize(250, 100);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         initPanelProgressBar();
@@ -73,16 +71,6 @@ public class ProgressBarFrame extends JFrame implements ActionListener {
                     "Done, your PC now is on the fly!!!!!", "Enjoy your new PC!",
                     JOptionPane.INFORMATION_MESSAGE);
                 ProgressBarFrame.this.setVisible(false);
-                try {
-                    // Specify the URL of the website
-                    URI uri = new URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley");
-                    // Open the website in the default browser
-                    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-                        Desktop.getDesktop().browse(uri);
-                    }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
             }
         };
         worker.execute();

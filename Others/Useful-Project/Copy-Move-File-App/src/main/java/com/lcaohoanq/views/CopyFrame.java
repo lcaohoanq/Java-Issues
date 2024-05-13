@@ -1,11 +1,18 @@
 package com.lcaohoanq.views;
 
-public class CopyFrame extends FunctionFrame{
+import javax.swing.JButton;
 
+public class CopyFrame extends FunctionFrame {
 
     public CopyFrame() {
         super();
+        copyButton = new JButton("Copy");
         this.setTitle("Copy Files");
+    }
+
+    @Override
+    protected void doAction() {
+        super.doAction();
     }
 
     public static void main(String[] args) {

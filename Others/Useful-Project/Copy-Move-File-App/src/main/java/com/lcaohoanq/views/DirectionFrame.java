@@ -13,13 +13,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-public class MainFrame extends JFrame implements ActionListener {
+public class DirectionFrame extends JFrame implements ActionListener {
 
     private JPanel jPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
     private JButton jButtonCopy = new JButton("Copy");
     private JButton jButtonMove = new JButton("Move");
 
-    public MainFrame() {
+    public DirectionFrame() {
         this.setTitle("Windows Tweaker");
         this.setSize(300, 100);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
