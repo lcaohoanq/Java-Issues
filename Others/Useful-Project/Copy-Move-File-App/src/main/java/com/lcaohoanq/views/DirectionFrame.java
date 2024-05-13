@@ -2,6 +2,7 @@ package com.lcaohoanq.views;
 
 import com.lcaohoanq.utils.ImageHandler;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -35,12 +36,16 @@ public class DirectionFrame extends JFrame implements ActionListener {
         jButtonCopy.setFont(new Font("Arial", Font.BOLD, 20));
         jButtonCopy.setPreferredSize(new Dimension(100, 50));
         jButtonCopy.setForeground(Color.WHITE);
+        jButtonCopy.setCursor(new Cursor(Cursor.HAND_CURSOR));
         jButtonCopy.addActionListener(this);
+
         jButtonMove.setBackground(Color.decode("#ff0000"));
         jButtonMove.setFont(new Font("Arial", Font.BOLD, 20));
         jButtonMove.setPreferredSize(new Dimension(100, 50));
         jButtonMove.setForeground(Color.WHITE);
+        jButtonMove.setCursor(new Cursor(Cursor.HAND_CURSOR));
         jButtonMove.addActionListener(this);
+
         jPanel.add(jButtonCopy);
         jPanel.add(jButtonMove);
         jPanel.setBorder(border);
