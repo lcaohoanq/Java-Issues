@@ -21,7 +21,7 @@ public class DirectionFrame extends JFrame implements ActionListener {
     private JButton jButtonMove = new JButton("Move");
 
     public DirectionFrame() {
-        this.setTitle("Windows Tweaker");
+        this.setTitle("Copy Move File App");
         this.setSize(300, 100);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);

@@ -1,7 +1,6 @@
 package com.lcaohoanq.controllers;
 
 import com.lcaohoanq.views.CopyFrame;
-import com.lcaohoanq.views.ProgressBarFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -10,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.concurrent.CountDownLatch;
 import javax.swing.JOptionPane;
 
 public class CopyController implements ActionListener {
@@ -28,20 +26,20 @@ public class CopyController implements ActionListener {
         String destinationPath = copyFrame.getFolderPath();
 
         if(!copyFrame.checkState()){
-            CountDownLatch latch = new CountDownLatch(1);
-
-            new Thread(() -> {
-                ProgressBarFrame progressBarFrame = new ProgressBarFrame();
-                progressBarFrame.setVisible(true);
-                progressBarFrame.triggerAction();
-                latch.countDown();  // Decrements the count of the latch, releasing all waiting threads when the count reaches zero
-            }).start();
-
-            try {
-                latch.await();  // Causes the current thread to wait until the latch has counted down to zero
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
+//            CountDownLatch latch = new CountDownLatch(1);
+//
+//            new Thread(() -> {
+//                ProgressBarFrame progressBarFrame = new ProgressBarFrame();
+//                progressBarFrame.setVisible(true);
+//                progressBarFrame.triggerAction();
+//                latch.countDown();  // Decrements the count of the latch, releasing all waiting threads when the count reaches zero
+//            }).start();
+//
+//            try {
+//                latch.await();  // Causes the current thread to wait until the latch has counted down to zero
+//            } catch (InterruptedException ex) {
+//                ex.printStackTrace();
+//            }
 
             // Check if source file and destination path are not null
             if (sourceFile != null && destinationPath != null) {

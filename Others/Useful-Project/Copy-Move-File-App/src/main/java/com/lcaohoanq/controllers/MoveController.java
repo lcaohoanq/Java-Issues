@@ -1,7 +1,6 @@
 package com.lcaohoanq.controllers;
 
 import com.lcaohoanq.views.MoveFrame;
-import com.lcaohoanq.views.ProgressBarFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -27,9 +26,9 @@ public class MoveController implements ActionListener {
         String destinationPath = moveFrame.getFolderPath();
 
         if(!moveFrame.checkState()){
-            ProgressBarFrame progressBarFrame = new ProgressBarFrame();
-            progressBarFrame.setVisible(true);
-            progressBarFrame.triggerAction();
+//            ProgressBarFrame progressBarFrame = new ProgressBarFrame();
+//            progressBarFrame.setVisible(true);
+//            progressBarFrame.triggerAction();
 
             // Check if source file and destination path are not null
             if (sourceFile != null && destinationPath != null) {
