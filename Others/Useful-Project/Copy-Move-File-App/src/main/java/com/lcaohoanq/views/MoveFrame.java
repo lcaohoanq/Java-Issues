@@ -1,5 +1,6 @@
 package com.lcaohoanq.views;
 
+import com.lcaohoanq.controllers.MoveController;
 import javax.swing.JButton;
 
 public class MoveFrame extends FunctionFrame{
@@ -14,6 +15,7 @@ public class MoveFrame extends FunctionFrame{
     @Override
     protected void doAction() {
         super.doAction();
+        processButton.addActionListener(new MoveController(this));
     }
 
     public static void main(String[] args) {

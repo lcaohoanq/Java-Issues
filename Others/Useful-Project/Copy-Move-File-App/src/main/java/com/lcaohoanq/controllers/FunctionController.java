@@ -9,6 +9,12 @@ import javax.swing.JOptionPane;
 public class FunctionController implements ActionListener {
 
     private FunctionFrame functionFrame;
+    private String frameType;
+
+    public FunctionController(FunctionFrame functionFrame, String frameType) {
+        this.functionFrame = functionFrame;
+        this.frameType = frameType;
+    }
 
     public FunctionController(FunctionFrame functionFrame) {
         this.functionFrame = functionFrame;

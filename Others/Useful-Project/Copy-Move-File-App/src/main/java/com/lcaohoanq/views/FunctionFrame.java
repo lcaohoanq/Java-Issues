@@ -1,7 +1,6 @@
 package com.lcaohoanq.views;
 
 import com.lcaohoanq.controllers.DataController;
-import com.lcaohoanq.controllers.FunctionController;
 import com.lcaohoanq.utils.FileHandler;
 import com.lcaohoanq.utils.ImageHandler;
 import java.awt.BorderLayout;
@@ -32,7 +31,7 @@ public abstract class FunctionFrame extends JFrame {
     private JScrollPane directoryScrollPane;
     private JPanel bottomPanel;
     private JTextArea fileInfoArea;
-    private JButton processButton;
+    protected JButton processButton;
     protected JButton copyButton;
     protected JButton moveButton;
     private JButton viewFileDataButton;
@@ -144,7 +143,6 @@ public abstract class FunctionFrame extends JFrame {
     protected void doAction() {
         viewFileData();
         viewFileDataButton.addActionListener(new DataController(this));
-        processButton.addActionListener(new FunctionController(this));
     }
 
     public String getFilePath() {
@@ -155,7 +153,13 @@ public abstract class FunctionFrame extends JFrame {
         return selectedDirectory == null ? null : selectedDirectory.getAbsolutePath();
     }
 
+    public File getFile(){
+        return selectedFile;
+    }
+
+    // need to open the file data to continue the processing
     public boolean checkState(){
         return fileInfoArea.getText().isEmpty() || directoryInfoArea.getText().isEmpty();
     }
+
 }

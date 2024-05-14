@@ -1,5 +1,6 @@
 package com.lcaohoanq.views;
 
+import com.lcaohoanq.controllers.CopyController;
 import javax.swing.JButton;
 
 public class CopyFrame extends FunctionFrame {
@@ -13,6 +14,7 @@ public class CopyFrame extends FunctionFrame {
     @Override
     protected void doAction() {
         super.doAction();
+        processButton.addActionListener(new CopyController(this));
     }
 
     public static void main(String[] args) {
