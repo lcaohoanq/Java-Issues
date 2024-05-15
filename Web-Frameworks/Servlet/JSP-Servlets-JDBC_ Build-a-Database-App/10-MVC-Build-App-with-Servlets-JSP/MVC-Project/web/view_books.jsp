@@ -36,15 +36,9 @@
                 <tbody>
                     <c:forEach var="book" items="${myBookStore}">
                         <tr>
-                            <td>
-                                ${book.getId()}
-                            </td>
-                            <td>
-                                ${book.getName()}
-                            </td>
-                            <td>
-                                ${book.getPrice()}
-                            </td>
+                            <td>${book.getId()}</td>
+                            <td>${book.getName()}</td>
+                            <td>${book.getPrice()}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
