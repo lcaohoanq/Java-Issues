@@ -1,0 +1,6 @@
+D003|hoang          |Black          |  1.20|Vong bac
+D001|Diep           |Xanh           |  1.50|Vong la cay
+D002|Tung           |Cam            |  1.70|Vong bach kim
+C001|Tuan           |Do             |  6.00|Ribbon trai tim
+C005|Ngoc           |Pink           |  7.00|CAT
+C003|Hoa            |Nau            | 16.00|Vong vang
