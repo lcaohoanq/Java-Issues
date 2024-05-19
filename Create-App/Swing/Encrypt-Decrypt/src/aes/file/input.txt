@@ -1,0 +1,5 @@
+AES-128: In AES-128, a 128-bit key is used. This means that the key is 16 bytes long. It uses 10 rounds of encryption and provides a high level of security for most applications.
+
+AES-192: In AES-192, a 192-bit key is used. This means that the key is 24 bytes long. It uses 12 rounds of encryption and provides a higher level of security compared to AES-128.
+
+AES-256: In AES-256, a 256-bit key is used. This means that the key is 32 bytes long. It uses 14 rounds of encryption and provides the highest level of security among the three key sizes
