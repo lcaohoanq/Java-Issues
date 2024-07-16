@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  tomcat:
+    image: lcaohoanq/prj301-ws2:1.1
+    container_name: ws2webserver
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./webapps:/usr/local/tomcat/webapps
+      - ./logs/:/usr/local/tomcat/logs/
+    environment:
+      - JAVA_OPTS=-Xms512m -Xmx1024m
+    ulimits:
+      nofile:
+        soft: 122880
+        hard: 122880
+
+networks:
+  default:
+    name: 'ws2webserver_network'
