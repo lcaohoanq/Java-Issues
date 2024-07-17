@@ -1,0 +1,25 @@
+@import "_common";
+
+/**
+ * Definition of the mixin, that could be included multiple times in CSS style definitions.
+ * Some browser support the standard 'border-radius' option; other browsers support it only though vendor-specific
+ * prefixes. With this mixin the SCSS defining customer layout stays clean.
+ */
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.box {
+  border:1px solid blue;
+  width: 300px;
+  padding: 20px;
+  margin-top:20px;
+  @include border-radius(20px); // add border-radius in one line, but include all vendor-specific prefixes as well.
+}
+
+
+
+
