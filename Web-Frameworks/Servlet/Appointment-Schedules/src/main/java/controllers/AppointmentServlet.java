@@ -1,17 +1,19 @@
-package java.controllers;
+package controllers;
 
-import java.DAO.AppointmentDAO;
-import java.DAO.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.utils.DBUtils;
-import java.utils.EmailUtils;
+import java.text.SimpleDateFormat;
+import models.AppointmentDTO;
+import service.AppointmentService;
+import service.UserService;
+import utils.DBUtils;
+import utils.EmailUtils;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -81,12 +83,19 @@ public class AppointmentServlet extends HttpServlet {
     private void createAppointment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         int userId = (int) session.getAttribute("userId");
-        String appointmentDate = request.getParameter("appointmentDate");
-        String appointmentTime = request.getParameter("appointmentTime");
+        String appointmentDateStr = request.getParameter("appointmentDate");
+        String appointmentTimeStr = request.getParameter("appointmentTime");
         String purpose = request.getParameter("purpose");
 
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
+
         try {
-            new AppointmentDAO().addAppointment(userId, appointmentDate, appointmentTime, purpose);
+
+            Timestamp appointmentDate = new Timestamp(dateFormatter.parse(appointmentDateStr).getTime());
+            Date appointmentTime = timeFormatter.parse(appointmentTimeStr);
+
+            new AppointmentService().addAppointment(new AppointmentDTO(userId, appointmentDate, appointmentTime, purpose));
             response.sendRedirect("dashboard.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,12 +104,18 @@ public class AppointmentServlet extends HttpServlet {
 
     private void editAppointment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        String appointmentDate = request.getParameter("appointmentDate");
-        String appointmentTime = request.getParameter("appointmentTime");
+        String appointmentDateStr = request.getParameter("appointmentDate");
+        String appointmentTimeStr = request.getParameter("appointmentTime");
         String purpose = request.getParameter("purpose");
 
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm:ss");
+
         try {
-            new AppointmentDAO().editAppointment(id, appointmentDate, appointmentTime, purpose);
+
+            Timestamp appointmentDate = new Timestamp(dateFormatter.parse(appointmentDateStr).getTime());
+            Date appointmentTime = timeFormatter.parse(appointmentTimeStr);
+            new AppointmentService().editAppointment(new AppointmentDTO(id, appointmentDate, appointmentTime, purpose));
             response.sendRedirect("viewAppointment.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -110,7 +125,7 @@ public class AppointmentServlet extends HttpServlet {
     private void openAppointment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            new AppointmentDAO().openAppointment(id);
+            new AppointmentService().openAppointment(id);
             response.sendRedirect("viewAppointment.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,7 +135,7 @@ public class AppointmentServlet extends HttpServlet {
     private void deleteAppointment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            new AppointmentDAO().deleteAppointment(id);
+            new AppointmentService().deleteAppointment(id);
             response.sendRedirect("viewAppointment.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +146,7 @@ public class AppointmentServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         System.out.println("In cancel appointment");
         try {
-            new AppointmentDAO().cancelAppointment(id);
+            new AppointmentService().cancelAppointment(id);
             response.sendRedirect("viewAppointment.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -141,7 +156,7 @@ public class AppointmentServlet extends HttpServlet {
     private void completedAppointment(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            new AppointmentDAO().completedAppointment(id);
+            new AppointmentService().completedAppointment(id);
             response.sendRedirect("viewAppointment.jsp");
         } catch (Exception e) {
             e.printStackTrace();
@@ -178,12 +193,12 @@ public class AppointmentServlet extends HttpServlet {
                         out.println("</script>");
                     } else {
                         EmailUtils handleEmail = new EmailUtils();
-                        UserDAO userDAO = new UserDAO();
-                        AppointmentDAO apDAO = new AppointmentDAO();
-                        String email = userDAO.getEmail(userId);
+                        UserService userService = new UserService();
+                        AppointmentService apService = new AppointmentService();
+                        String email = userService.findUserById(userId).getEmail();
 
                         String sub = "Reminder Notification";
-                        String msg = handleEmail.messageNewOrder(userDAO.getUserName(userId), apDAO.getDateAppointment(id).toString(), apDAO.getTimeAppointment(id).toString(), apDAO.getPurpose(id));
+                        String msg = handleEmail.messageNewOrder(userService.findUserById(userId).getUsername(), apService.findAppointmentById(id).getAppointmentDate().toString(), apService.findAppointmentById(id).getAppointmentTime().toString(), apService.findAppointmentById(id).getPurpose());
                         handleEmail.sendEmail(sub, msg, email);
                     }
                 }

@@ -7,7 +7,7 @@ USE appointment_schedules
 GO
 
 CREATE TABLE Users (
-    id INT PRIMARY KEY IDENTITY,
+    id INT PRIMARY KEY IDENTITY AUTO,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL

@@ -1,17 +1,14 @@
-package java.utils;
+package utils;
 
-import java.time.LocalDateTime;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import java.util.Properties;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.mail.Session;
 
 public class EmailUtils {
 
