@@ -6,6 +6,8 @@
     <class>one_to_many.Employee</class>
     <class>one_to_one.ParkingSpot</class>
     <class>one_to_one.EmployeeV2</class>
+    <class>many_to_many.Book</class>
+    <class>many_to_many.Author</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb" />
       <property name="jakarta.persistence.jdbc.user" value="sa" />
