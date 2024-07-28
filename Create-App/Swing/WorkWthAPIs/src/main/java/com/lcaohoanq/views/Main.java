@@ -13,8 +13,6 @@ import javax.swing.WindowConstants;
 public class Main extends JFrame implements ActionListener {
 
     public Main(){
-
-        this.setVisible(true);
         this.setSize(200,200);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -33,19 +31,20 @@ public class Main extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new Main();
+        new Main().setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 //        queryOptions("select * from users");
-        Notification.START_SPRING_SUCCESS();
+        new Notification().START_SPRING_SUCCESS();
+    }
+
+    class Notification {
+        public void START_SPRING_SUCCESS() {
+            JOptionPane.showMessageDialog(null, "Success start Spring Server", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
 }
 
-class Notification {
-    public static void START_SPRING_SUCCESS() {
-        JOptionPane.showMessageDialog(null, "Success start Spring Server", "Success", JOptionPane.INFORMATION_MESSAGE);
-    }
-}
