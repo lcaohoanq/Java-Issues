@@ -1,8 +1,8 @@
-package onetoone;
+package one_to_many;
 
 import jakarta.persistence.*;
 
-public class OneToOne {
+public class Main {
 
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
