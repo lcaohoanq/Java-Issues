@@ -1,1 +1,25 @@
 - Java is tough, sometimes
+
+# Naming Convention
+- Packages:
+  - Always lower case
+  - Package names should be unique
+  - Use your internet domain name, reversed, as a prefix for the package name
+    - Domain name components that are Java keywords should have that component start with an underscore 
+- Classes:
+  - PascalCase
+  - Class names should be nouns (they represend things)
+  - Should start with a capital letter
+  - Each word in the name should also start with a capital (LinkedList...)
+- Interfaces
+  - PascalCase
+  - Should start with a capital letter
+  - Consider what object implementing the interface will become of what they will be able to do 
+- Methods
+  - camelCase
+  - often verb
+  - reflect the function performed or the result returned
+- Constants
+  - ALL UPPER_CASE
+  - "final" keyword 
+- Variables:
