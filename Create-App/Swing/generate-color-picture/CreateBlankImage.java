@@ -7,11 +7,11 @@ import javax.imageio.ImageIO;
 public class CreateBlankImage {
     public static void main(String[] args) {
         // Define image dimensions
-        int width = 228;
-        int height = 407;
+        int width = 300;
+        int height = 650;
 
         // Define color (in RGB format)
-        Color color = new Color(255, 115, 29); // RGB value for #FF731D
+        Color color = new Color(25, 183, 25); // RGB value for #FF731D
 
         // Create a new buffered image with the specified dimensions and color
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -23,8 +23,8 @@ public class CreateBlankImage {
 
         // Save the image as a JPG file
         try {
-            File output = new File("resources\\blank_image.jpg");
-            ImageIO.write(image, "jpg", output);
+            File output = new File("/media/DATA/PERSONAL/Java/javafx/formhandling/src/main/resources/com/lcaohoanq/formhandling/assets/img/branding.png");
+            ImageIO.write(image, "png", output);
             System.out.println("Blank image created successfully.");
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
