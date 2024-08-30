@@ -1,4 +1,4 @@
-package com.lcaohoanq.jdk8;
+package com.lcaohoanq.java8;
 
 import java.util.Arrays;
 import java.util.List;

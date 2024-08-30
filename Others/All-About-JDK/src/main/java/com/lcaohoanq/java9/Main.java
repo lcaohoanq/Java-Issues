@@ -1,16 +1,15 @@
-package com.lcaohoanq.jdk9;
+package com.lcaohoanq.java9;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Main {
 
     public static void main(String[] args) {
         List<String> list = List.of("A", "B", "C");
-        list.stream().forEach(System.out::println);
+        list.forEach(System.out::println);
 
         //https://www.tutorialspoint.com/differences-between-takewhile-and-dropwhile-methods-in-java-9
         /*
@@ -30,14 +29,14 @@ public class Main {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         List<Integer> lessThanFive = numbers.stream()
             .takeWhile(n -> n < 5)
-            .collect(Collectors.toList());
+            .toList();
 
         System.out.println("Số nhỏ hơn 5: " + lessThanFive);
 
         // Ví dụ 2: dropWhile
         List<Integer> greaterThanThree = numbers.stream()
             .dropWhile(n -> n <= 3)
-            .collect(Collectors.toList());
+            .toList();
 
         System.out.println("Số lớn hơn 3: " + greaterThanThree);
 
@@ -48,20 +47,20 @@ public class Main {
         String value2 = null;
 
         // Ví dụ với giá trị không rỗng
-        Optional.ofNullable(value1)
+        Optional.of(value1)
             .ifPresentOrElse(v -> System.out.println("Ví dụ ofNullable - Giá trị không rỗng: " + v),
                 () -> System.out.println("Ví dụ ofNullable - Giá trị rỗng"));
 
         // Ví dụ với giá trị rỗng
-        Optional.ofNullable(value2)
+        Optional.empty()
             .ifPresentOrElse(v -> System.out.println("Ví dụ ofNullable - Giá trị không rỗng: " + v),
                 () -> System.out.println("Ví dụ ofNullable - Giá trị rỗng"));
 
         // Ví dụ của luồng an toàn với giá trị null
         List<String> names = Arrays.asList("Alice", "Bob", null, "Charlie", null, "David");
         List<String> nonNullNames = names.stream()
-            .flatMap(name -> Main.nullSafeStream(name))
-            .collect(Collectors.toList());
+            .flatMap(Main::nullSafeStream)
+            .toList();
 
         System.out.println("Các tên không rỗng: " + nonNullNames);
 

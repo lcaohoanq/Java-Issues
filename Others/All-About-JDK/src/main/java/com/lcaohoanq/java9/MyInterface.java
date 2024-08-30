@@ -1,4 +1,4 @@
-package com.lcaohoanq.jdk9;
+package com.lcaohoanq.java9;
 
 public interface MyInterface {
 

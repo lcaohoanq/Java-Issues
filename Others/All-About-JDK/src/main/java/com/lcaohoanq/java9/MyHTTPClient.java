@@ -1,4 +1,4 @@
-package com.lcaohoanq.jdk9;
+package com.lcaohoanq.java9;
 
 import java.net.URI;
 import java.net.http.HttpClient;

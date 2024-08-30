@@ -1,4 +1,4 @@
-package com.lcaohoanq.jdk8;
+package com.lcaohoanq.java8;
 
 public interface DefaultInterface {
 
