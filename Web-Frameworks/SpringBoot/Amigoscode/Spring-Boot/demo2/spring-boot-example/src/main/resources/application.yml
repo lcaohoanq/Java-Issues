@@ -1,6 +1,0 @@
-server:
-  port: 4000
-
-spring:
-  main:
-    web-application-type: servlet
