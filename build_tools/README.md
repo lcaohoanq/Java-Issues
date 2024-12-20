@@ -6,7 +6,7 @@
 
 # All of them is the build tools
 
-- A tools that package the code into a `.jar` file
+- A tools that package the code into a `.jar` or `.war` file
 
 # Which build tools have their own folder structure
 
