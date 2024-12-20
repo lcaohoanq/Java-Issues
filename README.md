@@ -66,6 +66,8 @@ public class Cat {
 }
 ```
 
+- Not a POJO!
+
 ```java
 public class Cat implements Animals {
 
