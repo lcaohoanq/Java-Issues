@@ -32,7 +32,7 @@
   </dependencies>
 ```
 
-- Config build for `persistence.xml`
+- In case we do not use Spring Boot, must be manually config the build process, which mean let the final product still remain the connection with `persistence.xml` file
 
 ```java
 <build>
