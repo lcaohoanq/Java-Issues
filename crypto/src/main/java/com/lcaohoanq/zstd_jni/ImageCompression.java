@@ -1,4 +1,4 @@
-package com.lcaohoanq;
+package com.lcaohoanq.zstd_jni;
 
 import com.github.luben.zstd.Zstd;
 import java.nio.file.Files;

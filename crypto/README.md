@@ -101,3 +101,5 @@ public class PBKDF2 {
 
 }
 ```
+
+# ZSTD Compression
