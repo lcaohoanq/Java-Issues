@@ -1,8 +1,3 @@
-
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 public class Sum {
 
     // Problem: Find the sum of elements in an array
