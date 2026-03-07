@@ -1,0 +1,70 @@
+logging {
+  level  = "debug"
+  format = "logfmt"
+}
+
+otelcol.receiver.otlp "example" {
+  grpc {
+    endpoint = "0.0.0.0:4317"
+  }
+
+  http {
+    endpoint = "127.0.0.1:4318"
+  }
+
+  output {
+    metrics = [otelcol.processor.batch.example.input]
+    logs    = [otelcol.processor.batch.example.input]
+    traces  = [otelcol.processor.batch.example.input]
+  }
+}
+
+otelcol.processor.batch "example" {
+  output {
+    metrics = [otelcol.exporter.prometheus.grafanacloud.input]
+    logs    = [otelcol.exporter.loki.grafana_cloud_logs.input]
+    traces  = [otelcol.exporter.otlp.grafana_cloud_traces.input]
+  }
+}
+
+otelcol.exporter.loki "grafana_cloud_logs" {
+  forward_to = [loki.write.grafana_cloud_logs.receiver]
+}
+
+loki.write "grafana_cloud_logs" {
+  endpoint {
+    url = "https://logs-prod-008.grafana.net/loki/api/v1/push"
+
+    basic_auth {
+      username = env("LOGS_USERNAME")
+      password = env("GRAFANA_CLOUD_API_KEY")
+    }
+  }
+}
+
+otelcol.exporter.prometheus "grafanacloud" {
+    forward_to = [prometheus.remote_write.grafanacloud.receiver]
+}
+
+prometheus.remote_write "grafanacloud" {
+    endpoint {
+        url = "https://prometheus-prod-05-gb-south-0.grafana.net/api/prom/push"
+
+        basic_auth {
+            username = env("METRICS_USERNAME")
+            password = env("GRAFANA_CLOUD_API_KEY")
+        }
+    }
+}
+
+otelcol.exporter.otlp "grafana_cloud_traces" {
+    client {
+    endpoint = "tempo-prod-06-prod-gb-south-0.grafana.net:443"
+    auth     = otelcol.auth.basic.grafana_cloud_traces.handler
+  }
+}
+
+otelcol.auth.basic "grafana_cloud_traces" {
+  username = env("TRACES_USERNAME")
+  password = env("GRAFANA_CLOUD_API_KEY")
+}

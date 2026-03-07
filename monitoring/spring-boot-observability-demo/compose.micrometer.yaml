@@ -1,0 +1,67 @@
+version: "3.7"
+
+services:
+  cart:
+    restart: always  # Should keep restarting Spring Boot until the DB is up
+    build:
+      context: .
+      dockerfile: Dockerfile.micrometer
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cart?currentSchema=public
+      SPRING_DATASOURCE_USERNAME: supershop
+      SPRING_DATASOURCE_PASSWORD: supershop
+      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: prometheus
+      MANAGEMENT_METRICS_TAGS_APPLICATION: shopping-cart
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: "1.0"
+        reservations:
+          memory: 1G
+          cpus: "0.5"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    depends_on:
+      - db
+    networks:
+      - demo-network
+
+  db:
+    image: docker.io/library/postgres:15.4
+    restart: always
+    environment:
+      POSTGRES_USER: supershop
+      POSTGRES_PASSWORD: supershop
+      POSTGRES_DB: cart
+    ports:
+      - "5432:5432"
+    networks:
+      - demo-network
+
+  agent:
+    image: docker.io/grafana/agent:latest
+    environment:
+      AGENT_MODE: flow
+      GRAFANA_CLOUD_API_KEY: "${GRAFANA_CLOUD_API_KEY}"
+      LOGS_USERNAME: "${LOGS_USERNAME}"
+      METRICS_USERNAME: "${METRICS_USERNAME}"
+      TRACES_USERNAME: "${TRACES_USERNAME}"
+    command:
+      - "run"
+      - "/etc/agent/config.river"
+    volumes:
+      - ./agent.micrometer.river:/etc/agent/config.river:z
+    networks:
+      - demo-network
+
+networks:
+  demo-network:
+    driver: bridge
+    name: demo-network

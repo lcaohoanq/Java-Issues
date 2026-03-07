@@ -1,0 +1,42 @@
+version: "3.7"
+
+services:
+  cart:
+    restart: always  # Should keep restarting Spring Boot until the DB is up
+    build:
+      context: .
+      dockerfile: Dockerfile.otel
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/cart?currentSchema=public
+      SPRING_DATASOURCE_USERNAME: supershop
+      SPRING_DATASOURCE_PASSWORD: supershop
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://agent:4317
+      OTEL_RESOURCE_ATTRIBUTES: deployment.environment=production,service.namespace=shop,service.version=1.1,service.instance.id=shopping-cart-66b6c48dd5-hprdn
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+  db:
+    image: docker.io/library/postgres:15.4
+    restart: always
+    environment:
+      POSTGRES_USER: supershop
+      POSTGRES_PASSWORD: supershop
+      POSTGRES_DB: cart
+    ports:
+      - "5432:5432"
+
+  agent:
+    image: docker.io/grafana/agent:latest
+    environment:
+      AGENT_MODE: flow
+      GRAFANA_CLOUD_API_KEY: "${GRAFANA_CLOUD_API_KEY}"
+      LOGS_USERNAME: "${LOGS_USERNAME}"
+      METRICS_USERNAME: "${METRICS_USERNAME}"
+      TRACES_USERNAME: "${TRACES_USERNAME}"
+    command:
+      - "run"
+      - "/etc/agent/config.river"
+    volumes:
+      - ./agent.cloud.river:/etc/agent/config.river:z

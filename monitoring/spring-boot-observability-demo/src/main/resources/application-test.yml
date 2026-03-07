@@ -1,0 +1,38 @@
+server:
+  port: ${SERVER_PORT_TEST}
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_TEST}
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    prometheus:
+      access: unrestricted
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: shopping-cart-test

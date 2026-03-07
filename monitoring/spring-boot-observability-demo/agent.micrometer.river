@@ -1,0 +1,25 @@
+logging {
+  level  = "debug"
+  format = "logfmt"
+}
+
+prometheus.scrape "spring_boot_scraper" {
+    targets = [{
+        __address__ = "cart:8080",
+    }]
+    metrics_path    = "/actuator/prometheus"
+    scrape_interval = "60s"
+    job_name        = "spring-boot-demo"
+    forward_to      = [prometheus.remote_write.grafanacloud.receiver]
+}
+
+prometheus.remote_write "grafanacloud" {
+    endpoint {
+        url = env("GRAFANA_CLOUD_PROMETHEUS_REMOTE_WRITE_URL")
+
+        basic_auth {
+            username = env("METRICS_USERNAME")
+            password = env("GRAFANA_CLOUD_API_KEY")
+        }
+    }
+}
