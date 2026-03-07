@@ -13,25 +13,48 @@ Optionally, to hack on the app and build it yourself:
 - [Java 17](https://whichjdk.com/)
 - [Maven](https://maven.apache.org/)
 
+There have 2 profiles (default,test)
+- default are using for docker implementation
+- test (h2) are running with ide for development
+
 ## Getting started, using Grafana Cloud
 
 1. Clone this repository
 
-1. Create a [Grafana Cloud](https://grafana.com/products/cloud/) account
- 
-1. Create a new [Grafana Cloud API key](https://grafana.com/docs/grafana-cloud/account-management/authentication-and-permissions/create-api-key/)
+2. Create a [Grafana Cloud](https://grafana.com/products/cloud/) account
 
-1. Using the included `.env.example` file as an example, create a new `.env` file for Compose in the root of the repository and fill in the values for your Grafana Cloud API key and Logs/Metrics/Traces usernames:
+<img width="1896" height="1030" alt="image" src="https://github.com/user-attachments/assets/26972c2b-c71b-48a9-881d-597eb2b09cde" />
+
+3. Create a new [Grafana Cloud API key](https://grafana.com/docs/grafana-cloud/account-management/authentication-and-permissions/create-api-key/)
+
+  - Security -> Access Policies ->  Create New Access Policies
+
+4. Create Prometheus connecion, press Detail at this section change (username, password, url)
+
+   ```river
+   prometheus.remote_write "grafanacloud" {
+     endpoint {
+       url = "<Your URL>"
+   
+       basic_auth {
+         username = "<Your Username"
+         password = "<Your Grafana.com API Token>"
+       }
+     }
+   }
+   ```
+
+5. Using the included `.env.example` file as an example, create a new `.env` file for Compose in the root of the repository and fill in the values for your Grafana Cloud API key and Logs/Metrics/Traces usernames:
 
     ```
     cp .env.example .env
     vi .env
     ```
 
-1. Bring up the app, database and Grafana Agent with Compose:
+6. Bring up the app, database and Grafana Agent with Compose:
 
     ```
-    docker-compose up -d
+    docker compose -f compose.micrometer.yaml up -d
    
     # or, if you prefer podman
     podman-compose up -d
@@ -39,7 +62,7 @@ Optionally, to hack on the app and build it yourself:
    
     When the app is starting up, you may see some errors from Spring Boot in the logs. This is normal and will go away once PostgreSQL has started up.
 
-1.  Test the app. Create a cart and add some items, then view the cart:
+7.  Test the app. Create a cart and add some items, then view the cart:
 
     ```
     curl -X POST localhost:8080/api/carts
